@@ -3,6 +3,11 @@ MQRedisSessionStorage
 
 Zend Framework Module for storing sessions in Redis.
 
+## Features
+- Redis SessionSaveHandler support
+- Uses Zend\Cache\StorageFactory
+- Easy session configuration
+
 ## Setup
 
   1. Run `php composer.phar require milqmedia/mq-redis-session:1.*`

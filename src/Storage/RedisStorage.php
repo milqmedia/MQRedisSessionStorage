@@ -20,22 +20,27 @@ use Zend\Cache\StorageFactory;
 
 class RedisStorage
 {
-    protected $redisConfig;
+    protected $_config;
 
-    public function __construct($redisConfig)
+    public function __construct($config)
     {
-        $this->redisConfig = $redisConfig;
+        $this->_config = $config;
     }
 
     public function setSessionStorage()
     {
-        $cache = StorageFactory::factory($this->redisConfig);
-		
+        $cache = StorageFactory::factory($this->_config['redis']);
+		          
 		$saveHandler = new Cache($cache);
 		
 		$manager = new SessionManager();
-		$manager->setSaveHandler($saveHandler);
+		
+		$sessionConfig = new \Zend\Session\Config\SessionConfig();
+        $sessionConfig->setOptions($this->_config['session']);
         
+        $manager->setConfig($sessionConfig);        
+		$manager->setSaveHandler($saveHandler);
+		       
 		$manager->start();
     }
 }

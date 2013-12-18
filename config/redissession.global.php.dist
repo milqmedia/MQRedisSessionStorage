@@ -11,15 +11,27 @@
  * 
  */
 return array(
+
     'mq-redis-session' => array (
-    	'adapter' => array (
-            'name' => 'redis',
-            'options' => array (
-                    'server' => [
-                    	'host' => '127.0.0.1',
-                        'port' => 6379,
-                    ]
-            ),
+    	'redis' => array(
+	    	'adapter' => array (
+	            'name' => 'redis',
+	            'options' => array (
+	                    'server' => [
+	                    	'host' => '127.0.0.1',
+	                        'port' => 6379,
+	                    ]
+	            ),
+			),
 		),
+		'session' => array(
+            'cache_expire' => 86400,
+            'cookie_lifetime' => 31536000,
+            'gc_maxlifetime' => 31536000,
+            'cookie_path' => '/',
+            'cookie_secure' => false,
+            'remember_me_seconds' => 31536000,
+            'use_cookies' => true,
+        ),
     )
 );

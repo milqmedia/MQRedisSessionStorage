@@ -1,0 +1,28 @@
+{
+    "name": "milqmedia/mq-redis-session",
+    "description": "Zend Framework 2 redis session storage",
+    "type": "library",
+    "keywords": ["redis","session","storage","zf2"],
+    "homepage": "https://github.com/milqmedia/MQRedisSessionStorage",
+    "license": "New BSD License",
+    "authors": [
+        {
+            "name": "Johan Kuijt",
+            "email": "johan@milq.nl",
+            "homepage": "http://www.milq.nl",
+            "role": "Hasselhoffer"
+        }
+    ],
+    "require": {
+        "php": ">=5.3.3",
+        "zendframework/zendframework": "2.*"
+    },
+    "autoload": {
+        "psr-0": {
+            "MQRedisSessionStorage": "src/"
+        },
+        "classmap": [
+            "Module.php"
+        ]
+    }
+}

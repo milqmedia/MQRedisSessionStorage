@@ -20,8 +20,10 @@ return array(
 	                    'server' => [
 	                    	'host' => '127.0.0.1',
 	                        'port' => 6379,
-	                    ]
-	            ),
+	                    ],
+	                    // optional db identifier
+						//'database' => 0,
+	            ),	            
 			),
 		),
 		'session' => array(

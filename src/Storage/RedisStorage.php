@@ -30,6 +30,11 @@ class RedisStorage
     public function setSessionStorage()
     {
         $cache = StorageFactory::factory($this->_config['redis']);
+		
+		// If database is set in the config use it		
+		if(isset($this->_config['redis']['adapter']['options']['database'])) {
+	        $cache->getOptions()->setDatabase($this->_config['redis']['adapter']['options']['database']);
+		}
 		          
 		$saveHandler = new Cache($cache);
 		

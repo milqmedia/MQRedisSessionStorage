@@ -47,5 +47,7 @@ class RedisStorage
 		$manager->setSaveHandler($saveHandler);
 		       
 		$manager->start();
+		
+		Container::setDefaultManager($manager);
     }
 }

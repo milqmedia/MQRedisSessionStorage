@@ -21,10 +21,22 @@ use Zend\Cache\StorageFactory;
 class RedisStorage
 {
     protected $_config;
+    protected $_manager;
 
     public function __construct($config)
     {
         $this->_config = $config;
+    }
+    
+    public function getManager() {
+	    return $this->_manager;
+    }
+    
+    public function changeTtl($ttl = 0) {
+	    
+	    $this->_config['redis']['adapter']['options']['ttl'] = $ttl;
+	    
+	    $this->setSessionStorage();
     }
 
     public function setSessionStorage()
@@ -49,5 +61,7 @@ class RedisStorage
 		$manager->start();
 		
 		Container::setDefaultManager($manager);
+		
+		$this->_manager = $manager;
     }
 }

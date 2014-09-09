@@ -13,6 +13,7 @@
 return array(
 
     'mq-redis-session' => array (
+    	'set_storage_on_boot' => true,
     	'redis' => array(
 	    	'adapter' => array (
 	            'name' => 'redis',

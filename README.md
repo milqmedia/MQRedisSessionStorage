@@ -14,3 +14,9 @@ Zend Framework Module for storing sessions in Redis.
   2. Add `MQRedisSessionStorage` to the enabled modules list
   3. Copy `vendor/milqmedia/mq-redis-session/redissession.global.php.dist` to `config/autoload/redissession.global.php` 
   4. Configure the session options in `config/autoload/redissession.global.php`
+  5. Set session storage in your project's main module or elsewhere:
+
+    ```php
+    $redisStorage = $sm->get('MQRedisSessionStorage\Storage\RedisStorage');
+    $redisStorage->setSessionStorage();
+    ```

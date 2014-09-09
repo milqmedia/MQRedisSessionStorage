@@ -17,7 +17,6 @@ class Module
     public function onBootstrap(\Zend\Mvc\MvcEvent $e)
     {
         $storage = $e->getApplication()->getServiceManager()->get('MQRedisSessionStorage\Storage\RedisStorage');
-        $storage->setSessionStorage();
     }
 
     public function getConfig()

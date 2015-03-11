@@ -16,6 +16,8 @@ use Zend\Session\Config\SessionConfig;
 use Zend\Session\SessionManager;
 use Zend\Session\Container;
 use Zend\Session\SaveHandler\Cache;
+use Zend\Session\Validator\HttpUserAgent;
+use Zend\Session\Validator\RemoteAddr;
 use Zend\Cache\StorageFactory;
 
 class RedisStorage
@@ -57,7 +59,10 @@ class RedisStorage
         
         $manager->setConfig($sessionConfig);        
 		$manager->setSaveHandler($saveHandler);
-		       
+		
+		// Validation to prevent session hijacking
+		$manager->getValidatorChain()->attach('session.validate', array(new HttpUserAgent(), 'isValid'));
+		$manager->getValidatorChain()->attach('session.validate', array(new RemoteAddr(), 'isValid'));		       
 		$manager->start();
 		
 		Container::setDefaultManager($manager);

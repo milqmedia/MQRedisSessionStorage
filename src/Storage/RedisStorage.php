@@ -67,7 +67,7 @@ class RedisStorage
 	try {
 		$manager->start();
 	} catch(Zend\Cache\Exception\InvalidArgumentException $e) {
-		trigger_error('MQ-RedisSession Error: ' . $e->getMessage(), E_USER_ERROR)	
+		trigger_error('MQ-RedisSession Error: ' . $e->getMessage(), E_USER_ERROR);	
 	}
 		
 	Container::setDefaultManager($manager);

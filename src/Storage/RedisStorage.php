@@ -45,28 +45,33 @@ class RedisStorage
     {
         $cache = StorageFactory::factory($this->_config['redis']);
 		
-		// If database is set in the config use it		
-		if(isset($this->_config['redis']['adapter']['options']['database'])) {
-	        $cache->getOptions()->setDatabase($this->_config['redis']['adapter']['options']['database']);
-		}
+	// If database is set in the config use it		
+	if(isset($this->_config['redis']['adapter']['options']['database'])) {
+		$cache->getOptions()->setDatabase($this->_config['redis']['adapter']['options']['database']);
+	}
 		          
-		$saveHandler = new Cache($cache);
+	$saveHandler = new Cache($cache);
 		
-		$manager = new SessionManager();
+	$manager = new SessionManager();
 		
-		$sessionConfig = new \Zend\Session\Config\SessionConfig();
+	$sessionConfig = new \Zend\Session\Config\SessionConfig();
         $sessionConfig->setOptions($this->_config['session']);
         
         $manager->setConfig($sessionConfig);        
-		$manager->setSaveHandler($saveHandler);
+	$manager->setSaveHandler($saveHandler);
 		
-		// Validation to prevent session hijacking
-		$manager->getValidatorChain()->attach('session.validate', array(new HttpUserAgent(), 'isValid'));
-		$manager->getValidatorChain()->attach('session.validate', array(new RemoteAddr(), 'isValid'));		       
+	// Validation to prevent session hijacking
+	$manager->getValidatorChain()->attach('session.validate', array(new HttpUserAgent(), 'isValid'));
+	$manager->getValidatorChain()->attach('session.validate', array(new RemoteAddr(), 'isValid'));		       
+	
+	try {
 		$manager->start();
+	catch(Zend\Cache\Exception\InvalidArgumentException $e) {
+		trigger_error('MQ-RedisSession Error: ' . $e->getMessage(), E_USER_ERROR)	
+	}
 		
-		Container::setDefaultManager($manager);
+	Container::setDefaultManager($manager);
 		
-		$this->_manager = $manager;
+	$this->_manager = $manager;
     }
 }

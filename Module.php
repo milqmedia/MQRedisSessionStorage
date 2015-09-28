@@ -21,7 +21,12 @@ class Module
 		if($config['mq-redis-session']['set_storage_on_boot'] === true) {
 		
 	        $storage = $e->getApplication()->getServiceManager()->get('MQRedisSessionStorage\Storage\RedisStorage');
-			$storage->setSessionStorage();
+			
+			try {
+				$storage->setSessionStorage();
+			} catch(\Zend\Cache\Exception\InvalidArgumentException $e) {
+				// Todo: Need to do some logging one time over here
+			}
 		}
     }
 

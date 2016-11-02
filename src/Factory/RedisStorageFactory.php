@@ -18,14 +18,19 @@ use MQRedisSessionStorage\Storage\RedisStorage;
 
 class RedisStorageFactory implements FactoryInterface
 {
-    public function createService(ServiceLocatorInterface $serviceLocator)
+    public function __invoke(\Interop\Container\ContainerInterface $container, $requestedName, array $options = NULL)
     {
-        $conf = $serviceLocator->get('Config');
+        $conf = $container->get('Config');
         $config = null;
         if (isset($conf['mq-redis-session'])) {
             $config = $conf['mq-redis-session'];
         }
         
         return new RedisStorage($config);
+    }
+    
+    public function createService(ServiceLocatorInterface $services)
+    {
+        return $this($services, 'MQRedis');
     }
 }

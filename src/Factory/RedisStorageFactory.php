@@ -24,10 +24,11 @@ class RedisStorageFactory implements FactoryInterface
 {
     /**
      * @param \Zend\ServiceManager\ServiceManager $container
+     * @param string $requestedName
      * @param array|NULL $options
      * @return RedisStorage
      */
-    public function __invoke($container, array $options = NULL)
+    public function __invoke($container, $requestedName, array $options = NULL)
     {
         $conf = $container->get('Config');
         $config = null;

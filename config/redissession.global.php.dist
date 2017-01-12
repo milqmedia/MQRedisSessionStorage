@@ -11,23 +11,22 @@
  * 
  */
 return array(
-
     'mq-redis-session' => array (
-    	'set_storage_on_boot' => true,
-    	'redis' => array(
-	    	'adapter' => array (
-	            'name' => 'redis',
-	            'options' => array (
-	                    'server' => [
-	                    	'host' => '127.0.0.1',
-	                        'port' => 6379,
-	                    ],
-	                    // optional db identifier
-						//'database' => 0,
-	            ),	            
-			),
-		),
-		'session' => array(
+        'set_storage_on_boot' => true,
+        'redis' => array(
+            'adapter' => array (
+                'name' => 'redis',
+                'options' => array (
+                    'server' => [
+                        'host' => '127.0.0.1',
+                        'port' => 6379,
+                    ],
+                    // optional db identifier
+                    //'database' => 0,
+                ),                
+            ),
+        ),
+        'session' => array(
             'cache_expire' => 86400,
             'cookie_lifetime' => 31536000,
             'gc_maxlifetime' => 31536000,

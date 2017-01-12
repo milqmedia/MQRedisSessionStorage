@@ -14,5 +14,4 @@ return array(
             'MQRedisSessionStorage\Storage\RedisStorage' => 'MQRedisSessionStorage\Factory\RedisStorageFactory',
         )
     ),
-
 );
